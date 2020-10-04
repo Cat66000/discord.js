@@ -1,3 +1,5 @@
+const Intents = require("./Intents");
+
 exports.Package = require('../../package.json');
 
 /**
@@ -53,6 +55,7 @@ exports.DefaultOptions = {
    * @typedef {Object} WebsocketOptions
    * @property {number} [large_threshold=250] Number of members in a guild to be considered large
    * @property {boolean} [compress=true] Whether to compress data sent on the connection
+   * @property {IntentsResolvable} [intents] Intents to enable for this connection
    * (defaults to `false` for browsers)
    */
   ws: {
@@ -65,20 +68,21 @@ exports.DefaultOptions = {
       $referrer: '',
       $referring_domain: '',
     },
-    version: 6,
+    intents: Intents.NON_PRIVILEGED,
+    version: 8,
   },
 
   /**
    * HTTP options
    * @typedef {Object} HTTPOptions
    * @property {number} [version=7] API version to use
-   * @property {string} [api='https://discordapp.com/api'] Base url of the API
+   * @property {string} [api='https://discord.com/api'] Base url of the API
    * @property {string} [cdn='https://cdn.discordapp.com'] Base url of the CDN
    * @property {string} [invite='https://discord.gg'] Base url of invites
    */
   http: {
-    version: 7,
-    host: 'https://discordapp.com',
+    version: 8,
+    host: 'https://discord.com',
     cdn: 'https://cdn.discordapp.com',
   },
 };
@@ -135,7 +139,7 @@ const Endpoints = exports.Endpoints = {
     return {
       toString: () => base,
       prune: `${base}/prune`,
-      embed: `${base}/embed`,
+      embed: `${base}/widget`,
       bans: `${base}/bans`,
       integrations: `${base}/integrations`,
       members: `${base}/members`,
@@ -238,7 +242,7 @@ const Endpoints = exports.Endpoints = {
     toString: () => '/gateway',
     bot: '/gateway/bot',
   },
-  Invite: inviteID => `/invite/${inviteID}?with_counts=true`,
+  Invite: inviteID => `/invites/${inviteID}?with_counts=true`,
   inviteLink: id => `https://discord.gg/${id}`,
   Webhook: (webhookID, token) => `/webhooks/${webhookID}${token ? `/${token}` : ''}`,
 };
@@ -395,7 +399,7 @@ exports.ActivityTypes = [
  * * `SYNC`
  * * `PLAY`
  * @typedef {string} ActivityFlag
- * @see {@link https://discordapp.com/developers/docs/topics/gateway#activity-object-activity-flags}
+ * @see {@link https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags}
  */
 exports.ActivityFlags = {
   INSTANCE: 1 << 0,
