@@ -367,11 +367,11 @@ class GuildAuditLogsEntry {
       case Actions.CHANNEL_OVERWRITE_UPDATE:
       case Actions.CHANNEL_OVERWRITE_DELETE:
         switch (data.options.type) {
-          case 'member':
+          case '1':
             this.extra = guild.members.get(data.options.id) ||
               { id: data.options.id, type: 'member' };
             break;
-          case 'role':
+          case '0':
             this.extra = guild.roles.get(data.options.id) ||
               { id: data.options.id, name: data.options.role_name, type: 'role' };
             break;
