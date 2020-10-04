@@ -190,7 +190,19 @@ class ClientUser extends User {
    *   .catch(console.error);
    */
   setPresence(data) {
-    // {"op":3,"d":{"status":"dnd","since":0,"game":null,"afk":false}}
+    /* {
+        "op": 3,
+        "d": {
+          "since": 91879201,
+          "activities": [{
+            "name": "Save the Oxford Comma",
+            "type": 0
+          }],
+          "status": "online",
+          "afk": false
+        }
+      }
+*/
     return new Promise(resolve => {
       let status = this.localPresence.status || this.presence.status;
       let game = this.localPresence.game;
@@ -227,7 +239,7 @@ class ClientUser extends User {
       if (typeof data.afk !== 'undefined') afk = data.afk;
       afk = Boolean(afk);
 
-      this.localPresence = { status, game, afk };
+      this.localPresence = { status, activities: [game], game, afk };
       this.localPresence.since = 0;
       this.localPresence.game = this.localPresence.game || null;
 
