@@ -29,7 +29,8 @@ class PresenceUpdateHandler extends AbstractHandler {
       if (!member && data.status !== 'offline') {
         member = guild._addMember({
           user,
-          roles: data.roles,
+          // Removed in API v8
+          roles: [],
           deaf: false,
           mute: false,
         }, false);
