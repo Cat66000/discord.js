@@ -41,19 +41,19 @@ class Presence {
      */
     this.status = data.status || this.status || 'offline';
 
+    if (data.activities) {
     /**
      * The game that the user is playing
      * @type {?Game}
      * @deprecated
      */
-    this.game = data.game ? new Game(data.game, this) : null;
+      this.game = data.activities[0] ? new Game(data.activities[0], this) : null;
 
-    if (data.activities) {
       /**
        * The activities of this presence
        * @type {Game[]}
        */
-      this.activities = data.activities.map(activity => new Game(activity, this));
+      this.activities = data.activities.map(activity => activity instanceof Game ? activity : new Game(activity, this));
     } else if (data.activity || data.game) {
       this.activities = [new Game(data.activity || data.game, this)];
     } else {
