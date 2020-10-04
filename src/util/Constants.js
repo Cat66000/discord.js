@@ -55,7 +55,7 @@ exports.DefaultOptions = {
    * @typedef {Object} WebsocketOptions
    * @property {number} [large_threshold=250] Number of members in a guild to be considered large
    * @property {boolean} [compress=true] Whether to compress data sent on the connection
-   * @property {IntentsResolvable} [intents] Intents to enable for this connection
+   * @property {IntentsResolvable} [intents] Intents to enable for this connection. By default it is set to all non-privileged intents.
    * (defaults to `false` for browsers)
    */
   ws: {
