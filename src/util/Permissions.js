@@ -135,6 +135,7 @@ class Permissions extends BitField {
  * - `READ_MESSAGE_HISTORY` (view messages that were posted prior to opening Discord)
  * - `MENTION_EVERYONE`
  * - `USE_EXTERNAL_EMOJIS` (use emojis from different guilds)
+ * - `VIEW_GUILD_INSIGHTS`
  * - `EXTERNAL_EMOJIS` **(deprecated)**
  * - `CONNECT` (connect to a voice channel)
  * - `SPEAK` (speak in a voice channel)
@@ -149,7 +150,7 @@ class Permissions extends BitField {
  * - `MANAGE_WEBHOOKS`
  * - `MANAGE_EMOJIS`
  * @type {Object}
- * @see {@link https://discordapp.com/developers/docs/topics/permissions}
+ * @see {@link https://discord.com/developers/docs/topics/permissions}
  */
 Permissions.FLAGS = {
   CREATE_INSTANT_INVITE: 1 << 0,
@@ -174,6 +175,7 @@ Permissions.FLAGS = {
   MENTION_EVERYONE: 1 << 17,
   EXTERNAL_EMOJIS: 1 << 18,
   USE_EXTERNAL_EMOJIS: 1 << 18,
+  VIEW_GUILD_INSIGHTS: 1 << 19,
 
   CONNECT: 1 << 20,
   SPEAK: 1 << 21,
