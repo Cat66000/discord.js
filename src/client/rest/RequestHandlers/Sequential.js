@@ -69,7 +69,7 @@ class SequentialRequestHandler extends RequestHandler {
             this.client.setTimeout(() => {
               this.globalLimit = false;
               resolve();
-            }, Number(res.headers['retry-after']) + this.client.options.restTimeOffset);
+            }, (Number(res.headers['retry-after']) * 1000) + this.client.options.restTimeOffset);
             if (res.headers['x-ratelimit-global']) this.globalLimit = true;
           } else if (err.status >= 500 && err.status < 600) {
             if (item.retries === this.client.options.retryLimit) {

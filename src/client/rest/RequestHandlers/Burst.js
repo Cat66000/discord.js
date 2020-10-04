@@ -40,7 +40,7 @@ class BurstRequestHandler extends RequestHandler {
             this.globalLimit = false;
             this.handle();
             this.resetTimeout = null;
-          }, Number(res.headers['retry-after']) + this.client.options.restTimeOffset);
+          }, (Number(res.headers['retry-after']) * 1000) + this.client.options.restTimeOffset);
         } else if (err.status >= 500 && err.status < 600) {
           if (item.retries === this.client.options.retryLimit) {
             item.reject(err);
