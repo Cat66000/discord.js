@@ -765,6 +765,14 @@ declare module 'discord.js' {
 		public sync(): Promise<Integration>;
 	}
 
+	export class Intents extends BitField<IntentsString> {
+		public static FLAGS: Record<IntentsString, number>;
+		public static PRIVILEGED: number;
+		public static ALL: number;
+		public static NON_PRIVILEGED: number;
+		public static resolve(bit?: BitFieldResolvable<IntentsString>): number;
+	}
+
 	export class Invite {
 		constructor(client: Client, data: object);
 		public channel: GuildChannel | PartialGuildChannel;
@@ -2051,6 +2059,23 @@ declare module 'discord.js' {
 		number: string;
 	}
 
+	type IntentsString =
+    | 'GUILDS'
+    | 'GUILD_MEMBERS'
+    | 'GUILD_BANS'
+    | 'GUILD_EMOJIS'
+    | 'GUILD_INTEGRATIONS'
+    | 'GUILD_WEBHOOKS'
+    | 'GUILD_INVITES'
+    | 'GUILD_VOICE_STATES'
+    | 'GUILD_PRESENCES'
+    | 'GUILD_MESSAGES'
+    | 'GUILD_MESSAGE_REACTIONS'
+    | 'GUILD_MESSAGE_TYPING'
+    | 'DIRECT_MESSAGES'
+    | 'DIRECT_MESSAGE_REACTIONS'
+	| 'DIRECT_MESSAGE_TYPING';
+	
 	type InviteOptions = {
 		temporary?: boolean;
 		maxAge?: number;
@@ -2179,6 +2204,7 @@ declare module 'discord.js' {
 		READ_MESSAGE_HISTORY?: number;
 		MENTION_EVERYONE?: number;
 		USE_EXTERNAL_EMOJIS?: number;
+		VIEW_GUILD_INSIGHTS?: number;
 		EXTERNAL_EMOJIS?: number;
 		CONNECT?: number;
 		SPEAK?: number;
@@ -2395,6 +2421,7 @@ declare module 'discord.js' {
 	type WebSocketOptions = {
 		large_threshold?: number;
 		compress?: boolean;
+		intents?: BitFieldResolvable<IntentsString> | number;
 	};
 
 	type WSEventType = 'READY'
