@@ -153,7 +153,7 @@ class Guild {
      * Whether embedded images are enabled on this guild
      * @type {boolean}
      */
-    this.embedEnabled = data.embed_enabled;
+    this.embedEnabled = data.widget_enabled;
 
     /**
      * The verification level of the guild
@@ -233,7 +233,7 @@ class Guild {
      * @type {?string}
      * @name Guild#embedChannelID
      */
-    if (typeof data.embed_channel_id !== 'undefined') this.embedChannelID = data.embed_channel_id;
+    if (typeof data.widget_channel_id !== 'undefined') this.embedChannelID = data.widget_channel_id;
 
     /**
      * The maximum amount of members the guild can have
@@ -1211,11 +1211,12 @@ class Guild {
    */
   ban(user, options = {}) {
     if (typeof options === 'number') {
-      options = { reason: null, 'delete-message-days': options };
+      options = { reason: null, delete_message_days: options };
     } else if (typeof options === 'string') {
-      options = { reason: options, 'delete-message-days': 0 };
+      options = { reason: options, delete_message_days: 0 };
     }
-    if (options.days) options['delete-message-days'] = options.days;
+    if (options.days) options.delete_message_days = options.days;
+
     return this.client.rest.methods.banGuildMember(this, user, options);
   }
 
@@ -1482,12 +1483,12 @@ class Guild {
       Util.arraysEqual(this.features, guild.features) &&
       this.ownerID === guild.owner_id &&
       this.verificationLevel === guild.verification_level &&
-      this.embedEnabled === guild.embed_enabled;
+      this.embedEnabled === guild.widget_enabled;
 
     if (equal) {
       if (this.embedChannel) {
-        if (this.embedChannel.id !== guild.embed_channel_id) equal = false;
-      } else if (guild.embed_channel_id) {
+        if (this.embedChannel.id !== guild.widget_channel_id) equal = false;
+      } else if (guild.widget_channel_id) {
         equal = false;
       }
     }
