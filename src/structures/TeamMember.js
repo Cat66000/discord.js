@@ -27,7 +27,7 @@ class TeamMember {
      * The permissions this Team Member has with regard to the team
      * @type {string[]}
      */
-    this.permissions = data.permissions;
+    this.permissions = Number(data.permissions);
 
     /**
      * The membership state this Team Member has with regard to the team

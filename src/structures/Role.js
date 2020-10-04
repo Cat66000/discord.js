@@ -65,7 +65,7 @@ class Role {
      * The permissions bitfield of the role
      * @type {number}
      */
-    this.permissions = data.permissions;
+    this.permissions = Number(data.permissions);
 
     /**
      * Whether or not the role is managed by an external service

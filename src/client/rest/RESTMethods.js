@@ -439,7 +439,7 @@ class RESTMethods {
 
   createGuildRole(guild, data, reason) {
     if (data.color) data.color = this.client.resolver.resolveColor(data.color);
-    if (data.permissions) data.permissions = Permissions.resolve(data.permissions);
+    if (data.permissions) data.permissions = String(Permissions.resolve(data.permissions));
     return this.rest.makeRequest('post', Endpoints.Guild(guild).roles, true, data, undefined, reason).then(r => {
       const { role } = this.client.actions.GuildRoleCreate.handle({
         guild_id: guild.id,
@@ -670,8 +670,8 @@ class RESTMethods {
     data.hoist = typeof _data.hoist !== 'undefined' ? _data.hoist : role.hoist;
     data.mentionable = typeof _data.mentionable !== 'undefined' ? _data.mentionable : role.mentionable;
 
-    if (typeof _data.permissions !== 'undefined') data.permissions = Permissions.resolve(_data.permissions);
-    else data.permissions = role.permissions;
+    if (typeof _data.permissions !== 'undefined') data.permissions = String(Permissions.resolve(_data.permissions));
+    else data.permissions = String(role.permissions);
 
     return this.rest.makeRequest('patch', Endpoints.Guild(role.guild).Role(role.id), true, data, undefined, reason)
       .then(_role =>
