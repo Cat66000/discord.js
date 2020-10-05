@@ -22,7 +22,8 @@ module.exports = {
   Util: Util,
   util: Util,
   version: require('../package').version,
-
+  Intents: require('/util/Intents'),
+  
   // Shortcuts to Util methods
   escapeMarkdown: Util.escapeMarkdown,
   fetchRecommendedShards: Util.fetchRecommendedShards,
@@ -46,7 +47,6 @@ module.exports = {
   GuildMember: require('./structures/GuildMember'),
   Integration: require('./structures/Integration'),
   Invite: require('./structures/Invite'),
-  Intents: require('/structures/Intents'),
   Message: require('./structures/Message'),
   MessageAttachment: require('./structures/MessageAttachment'),
   MessageCollector: require('./structures/MessageCollector'),
