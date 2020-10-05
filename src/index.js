@@ -22,7 +22,7 @@ module.exports = {
   Util: Util,
   util: Util,
   version: require('../package').version,
-  Intents: require('/util/Intents'),
+  Intents: require('./util/Intents'),
   
   // Shortcuts to Util methods
   escapeMarkdown: Util.escapeMarkdown,
